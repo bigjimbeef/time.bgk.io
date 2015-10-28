@@ -65,7 +65,48 @@ function updateClock() {
 	cssRotateTransform($('#hour-hand'), hourAngle, false);
 }
 
+Math.radians = function(degrees) {
+	return degrees * Math.PI / 180;
+};
+
+var numbersAdded = false;
+function addNumbers() {
+
+	var degInCircle = 360;
+	var numNumbers	= 12;
+	var degPerNum	= degInCircle / numNumbers;
+	var degStart	= -90;
+
+	var r = 125;
+
+	for ( var i = 1; i <= numNumbers; ++i ) {
+
+		// degStart rotates 12 to the top.
+		var theta = Math.radians(degStart + (i * degPerNum));
+
+		// x = r.cos(t)
+		// y = r.sin(theta);
+		var x = r * Math.cos(theta);
+		var y = r * Math.sin(theta);
+
+		var posStyle = "left: " + x + "px; top: " + y + "px;"
+
+		var rotTheta = Math.radians(i * degPerNum);
+		var rotStyle = "-webkit-transform: rotate(" + rotTheta + "rad); -moz-transform: rotate(" + rotTheta + "rad);";
+
+		var el = "<div class='number' style='" + posStyle + rotStyle + "'>" + i + "</div>";
+		$('#numbers').append(el);
+	}
+}
+
 $(document).ready(function() {
+
+	if ( !numbersAdded ) {
+
+		addNumbers();
+
+		numbersAdded = true;
+	}
 
 	drawClock();
 
