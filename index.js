@@ -110,7 +110,7 @@ $(document).ready(function() {
 
 	drawClock();
 
-	var deltaTime = 10;
+	var deltaTime = 100;
 	var updateInt = setInterval(function() {
 
 		updateClock();
