@@ -99,6 +99,17 @@ function addNumbers() {
 	}
 }
 
+function setTitle() {
+
+	var now = moment().format("HH:mm:ss");
+
+	var curTitle = $('title').text();
+
+	if ( now != curTitle ) {
+		$('title').text(now);		
+	}
+}
+
 $(document).ready(function() {
 
 	if ( !numbersAdded ) {
@@ -114,6 +125,8 @@ $(document).ready(function() {
 	var updateInt = setInterval(function() {
 
 		updateClock();
+
+		setTitle();
 
 	}, deltaTime);
 });
